@@ -1,7 +1,3 @@
-// सबसे ऊपर ये लाइन्स जोड़ें
-process.env.NODE_ENV = 'production';
-process.env.YTDL_NO_UPDATE = 'true';
-process.env.PORT = 10000;
 const express = require('express');
 const ytdl = require('ytdl-core');
 const cors = require('cors');
