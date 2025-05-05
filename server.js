@@ -8,7 +8,10 @@ app.use(cors({
   origin: 'https://youtube-downloader-3-fihv.onrender.com' // अपना Render URL डालें
 }));
 
-app.use(cors());
+app.use(cors({
+  origin: '*',
+  methods: ['GET']
+}));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
