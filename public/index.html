@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YT Premium Downloader</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="light-mode">
+    <header>
+        <div class="container">
+            <h1>YT Premium Downloader</h1>
+            <div class="theme-switch">
+                <i class="fas fa-sun"></i>
+                <label class="switch">
+                    <input type="checkbox" id="theme-toggle">
+                    <span class="slider round"></span>
+                </label>
+                <i class="fas fa-moon"></i>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="download-section">
+            <div class="input-group">
+                <input type="text" id="video-url" placeholder="Paste YouTube URL here...">
+                <button id="fetch-btn">Fetch Video</button>
+            </div>
+
+            <div class="video-details" id="video-details" style="display: none;">
+                <div class="thumbnail-container">
+                    <img id="thumbnail" src="" alt="Video Thumbnail">
+                    <div class="duration-badge" id="duration"></div>
+                </div>
+                <div class="info-container">
+                    <h2 id="video-title"></h2>
+                    <p id="video-channel"></p>
+                    <p id="video-views"></p>
+                </div>
+            </div>
+
+            <div class="download-options" id="download-options" style="display: none;">
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="video">Video</button>
+                    <button class="tab-btn" data-tab="audio">MP3</button>
+                </div>
+
+                <div class="tab-content" id="video-tab">
+                    <div class="quality-options">
+                        <h3>Select Quality:</h3>
+                        <div class="quality-buttons" id="video-quality-btns">
+                            <!-- Quality buttons will be added dynamically -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="audio-tab" style="display: none;">
+                    <div class="quality-options">
+                        <h3>MP3 Audio:</h3>
+                        <button class="download-btn mp3-btn" data-format="mp3">
+                            <i class="fas fa-music"></i> Download MP3
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2023 YT Premium Downloader. For educational purposes only.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
