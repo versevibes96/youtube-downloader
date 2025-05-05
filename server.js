@@ -1,7 +1,10 @@
 const express = require('express');
 const ytdl = require('ytdl-core');
-const cors = require('cors');
 const path = require('path');
+const cors = require('cors');
+app.use(cors({
+  origin: 'https://youtube-downloader-3-fihv.onrender.com' // अपना Render URL डालें
+}));
 
 const app = express();
 app.use(cors());
