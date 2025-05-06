@@ -190,6 +190,4 @@ fetch(`${API_URL}/api/video-info?url=${encodeURIComponent(videoUrl)}`)
     }
 });
 
-// Heroku/Render के URL का इस्तेमाल करें
-const API_URL = "https://youtube-downloader-3-1kvl.onrender.com"; 
 
