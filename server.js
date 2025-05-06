@@ -5,15 +5,13 @@ const path = require('path');
 
 const app = express();
 app.use(cors({
-  origin: 'https://youtube-downloader-3-fihv.onrender.com' // अपना Render URL डालें
+  origin: 'https://youtube-downloader-3-fihv.onrender.com',// अपना Render URL डालें
+  methods: ['GET'],
+  credentials: true
 }));
 
-app.use(cors({
-  origin: '*',
-  methods: ['GET']
-}));
 
-app.use(express.static('public')); // so index.html, script.js, etc. can be served
+app.use(express.static(path.join(__dirname, 'public'))); // so index.html, script.js, etc. can be served
 
 // Add this route
 app.get('/', (req, res) => {
