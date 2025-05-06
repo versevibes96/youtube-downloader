@@ -13,7 +13,7 @@ app.use(cors({
   methods: ['GET']
 }));
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static('public')); // so index.html, script.js, etc. can be served
 
 // Add this route
 app.get('/', (req, res) => {
