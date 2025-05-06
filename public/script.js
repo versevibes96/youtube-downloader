@@ -74,7 +74,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         // Make API call to your backend
-        fetch(`/api/video-info?url=${encodeURIComponent(videoUrl)}`)
+        const API_URL = "https://youtube-downloader-3-fihv.onrender.com";
+fetch(`${API_URL}/api/video-info?url=${encodeURIComponent(videoUrl)}`)
             .then(response => response.json())
             .then(data => {
                 if (data.error) {
