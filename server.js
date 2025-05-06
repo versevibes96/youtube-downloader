@@ -1,57 +1,66 @@
 const express = require('express');
 const ytdl = require('ytdl-core');
+const cors = require('cors');
+const path = require('path');
+
 const app = express();
-const PORT = process.env.PORT || 3000;
+app.use(cors({
+  origin: 'https://youtube-downloader-3-fihv.onrender.com' // अपना Render URL डालें
+}));
 
-// Middleware
-app.use(express.static('public'));
-app.use(express.json());
+app.use(cors({
+  origin: '*',
+  methods: ['GET']
+}));
 
-// Video Info Endpoint
-app.get('/api/info', async (req, res) => {
+app.use(express.static('public')); // so index.html, script.js, etc. can be served
+
+// Add this route
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+app.get('/api/video-info', async (req, res) => {
     try {
-        const videoId = req.query.videoId;
-        const info = await ytdl.getInfo(videoId);
+        const url = req.query.url;
+        if (!url) {
+            return res.status(400).json({ error: 'URL parameter is required' });
+        }
+
+        const isValid = ytdl.validateURL(url);
+        if (!isValid) {
+            return res.status(400).json({ error: 'Invalid YouTube URL' });
+        }
+
+        const info = await ytdl.getInfo(url);
         
-        const data = {
-            id: videoId,
+        // Format the response data
+        const response = {
             title: info.videoDetails.title,
-            channel: info.videoDetails.author.name,
-            duration: parseInt(info.videoDetails.lengthSeconds),
-            thumbnail: info.videoDetails.thumbnails.slice(-1)[0].url,
-            formats: info.formats
-                .filter(f => f.qualityLabel)
-                .map(format => ({
-                    itag: format.itag,
-                    qualityLabel: format.qualityLabel,
-                    container: format.container,
-                    url: format.url
-                }))
+            author: info.videoDetails.author.name,
+            views: info.videoDetails.viewCount,
+            duration: info.videoDetails.lengthSeconds,
+            formats: info.formats.map(format => ({
+                url: format.url,
+                quality: format.quality,
+                qualityLabel: format.qualityLabel,
+                mimeType: format.mimeType,
+                hasVideo: !!format.qualityLabel,
+                hasAudio: format.hasAudio
+            }))
         };
 
-        res.json(data);
+        res.json(response);
     } catch (error) {
-        res.status(400).json({ error: 'Invalid YouTube URL' });
+        console.error('Error:', error);
+        res.status(500).json({ error: 'Failed to fetch video info' });
     }
 });
 
-// Video Download Endpoint
-app.get('/download', async (req, res) => {
-    try {
-        const videoId = req.query.videoId;
-        const itag = req.query.itag;
-        const title = req.query.title || 'video';
-        
-        res.header('Content-Disposition', `attachment; filename="${title}.mp4"`);
-        ytdl(videoId, { quality: itag }).pipe(res);
-    } catch (error) {
-        res.status(500).send('Download Error');
-    }
-});
+// const cors = require('cors');
+// app.use(cors()); // सभी requests को allow करने के लिए
 
-// MP3 Download Endpoint (FFmpeg required)
-app.get('/download/mp3', async (req, res) => {
-    // Add FFmpeg conversion logic here
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
 });
-
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
