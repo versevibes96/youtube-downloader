@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
 app.get('/api/video-info', async (req, res) => {
     try {
         const url = req.query.url;
-        if (!url) {
+        if (!url.includes('youtube.com') && !url.includes('youtu.be')) {
             return res.status(400).json({ error: 'URL parameter is required' });
         }
 
