@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://yourusername.github.io/youtube-downloader-frontend",
+  "homepage": "https://versevibes96.github.io/youtube-downloader",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
