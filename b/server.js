@@ -8,7 +8,11 @@ const { cleanupOldFiles, ensureDownloadsDir } = require('./utils/storage');
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: 'https://youtube-downloader-hazel.vercel.app/',
+  credentials: true
+}));
+
 app.use(express.json());
 
 // Routes
