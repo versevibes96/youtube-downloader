@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
-    "clean": "rm -rf downloads/*"
+    "clean": "rm -rf downloads/*",
+    "build": "echo 'Build complete!'"
   },
   "keywords": [],
   "author": "",
@@ -25,5 +26,8 @@
   "devDependencies": {
     "dotenv": "^16.5.0",
     "nodemon": "^3.1.10"
+  },
+  "engines": {
+    "node": "^22.14.0" # Specify your Node version
   }
 }
