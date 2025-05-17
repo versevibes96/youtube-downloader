@@ -7,4 +7,4 @@ export const QUALITY_OPTIONS = [
   { value: '1080', label: '1080p HD' },
 ];
 
-export const API_URL = 'http://localhost:5000/api'; // Replace with your actual API
+export const API_URL = 'https://youtube-downloader-qab5.onrender.com';
